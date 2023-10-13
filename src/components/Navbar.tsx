@@ -41,7 +41,9 @@ export default function NavBar() {
   const pathName = usePathname();
 
   return (
-    <div className="sticky top-0 w-full flex bg-gray-200 px-24 h-12 items-center gap-4">
+    <div className="sticky top-0 w-full flex bg-gray-200 px-24 h-12 
+    
+    items-center gap-4">
      
       <div className="flex ">
         <ul className="flex gap-4 items-center">

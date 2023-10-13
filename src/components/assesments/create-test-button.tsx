@@ -1,10 +1,10 @@
-"use client";
 
+import Link from 'next/link';
 import React from 'react'
 
 const CreateTestButton = () => {
   return (
-    <button className='bg-blue-500 rounded-md text-white p-2' onClick={()=>console.log("test creation started")}>CREATE TEST</button>
+    <Link className='bg-emerald-400 rounded-md text-white p-2' href={`/assesments/create`}>CREATE TEST</Link>
   )
 }
 

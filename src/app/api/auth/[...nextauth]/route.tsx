@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { apiURLs } from "@/components/utiils/config";
+import { JWT } from "next-auth/jwt";
 
 export const authOptions = {
   providers: [
@@ -35,12 +36,11 @@ export const authOptions = {
         });
 
         const user = await res.json();
-
         if (res.ok && user) {
           return user;
         }
 
-        return "no user found";
+        return Promise.reject(new Error(user?.errors));
       },
     }),
     GitHubProvider({
@@ -48,6 +48,21 @@ export const authOptions = {
       clientSecret: process.env.GITHUB_SECRET ?? "",
     }),
   ],
+  sessions:{
+    strategy: "jwt",
+  },
+  callbacks:{
+    async jwt({token,user}:any){
+      if(user) return {...token,...user}
+      return token;
+    },
+    async session({token,session}:{token:JWT,session:any}){
+      session.userdata = token.data;
+      session.backendToken = token?.data?.refreshToken;
+      return session
+    }
+  }
+
 };
 
 export const handler = NextAuth(authOptions);

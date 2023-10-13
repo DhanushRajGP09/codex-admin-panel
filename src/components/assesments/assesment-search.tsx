@@ -1,4 +1,5 @@
 "use client"
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 const AssesmentSearch = () => {
@@ -10,17 +11,23 @@ const AssesmentSearch = () => {
    
     
     }
+    const router = useRouter();
     // console.log("data",data)
 
   return (
-    <input placeholder='Search Assesments'  onChange={ (e) => {
+    <div className=' w-1/5  p-2 rounded-md border-2 border-emerald-400'>
+      <input placeholder='Search Assesments'  onChange={ (e) => {
         setTestName(e.target.value);
-        if (e.target.value === "") {
-          getAllTest();
-        } else {
-        //   handleSearchTest(e.target.value);
+        if(e.target.value == ""){
+          router.replace(`/assesments`)
+        }else{
+          router.replace(`?search=${e.target.value}`,{scroll:true})
         }
-      }}></input>
+         
+       
+      }} className=' appearance-none outline-none w-full'></input>
+    </div>
+    
   )
 }
 

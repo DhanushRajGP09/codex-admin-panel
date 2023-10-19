@@ -3,7 +3,7 @@ import React from 'react'
 import Assesments from './assesments';
 
 const AssesmentBody:React.FC<{data:IAssesment[]}>=({data})=>{
-    console.log("data............................",data[0]?.questionId)
+    // console.log("data............................",data[0]?.questionId)
     
     
   return (
